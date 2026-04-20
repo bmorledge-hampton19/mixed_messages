@@ -1,0 +1,20 @@
+[gd_resource type="AudioStreamPlaylist" format=3 uid="uid://kbu4bk0hc8i7"]
+
+[ext_resource type="AudioStream" uid="uid://3miypos67ki" path="res://audio/music/music_1.ogg" id="1_mfemj"]
+[ext_resource type="AudioStream" uid="uid://p8u5t0dk46fk" path="res://audio/music/music_2.ogg" id="2_opopp"]
+[ext_resource type="AudioStream" uid="uid://cncf1uc7w643a" path="res://audio/music/music_3.ogg" id="3_32kkn"]
+[ext_resource type="AudioStream" uid="uid://cucjo0jcm6mnn" path="res://audio/music/music_4.ogg" id="4_mxd61"]
+[ext_resource type="AudioStream" uid="uid://dp5mbm21wcrl1" path="res://audio/music/music_5.ogg" id="5_npw8h"]
+[ext_resource type="AudioStream" uid="uid://dscn7isq2no7a" path="res://audio/music/music_6.ogg" id="6_461nu"]
+[ext_resource type="AudioStream" uid="uid://wxr0672r3s7p" path="res://audio/music/music_7.ogg" id="7_acwjq"]
+
+[resource]
+shuffle = true
+stream_count = 7
+stream_0 = ExtResource("1_mfemj")
+stream_1 = ExtResource("2_opopp")
+stream_2 = ExtResource("3_32kkn")
+stream_3 = ExtResource("4_mxd61")
+stream_4 = ExtResource("5_npw8h")
+stream_5 = ExtResource("6_461nu")
+stream_6 = ExtResource("7_acwjq")

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cfcy0hhsbj4mp"]
+
+[ext_resource type="FontFile" uid="uid://np3mj1jymi10" path="res://fonts/CourierPrime/CourierPrime-Bold.ttf" id="1_xno7m"]
+[ext_resource type="Script" uid="uid://bdmjug7aqfew1" path="res://messages/incoming/FallingLetter.gd" id="2_5tl08"]
+
+[node name="FallingLetter" type="Label" unique_id=889785023]
+self_modulate = Color(0.6431373, 0, 0, 1)
+custom_minimum_size = Vector2(24, 0)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("1_xno7m")
+theme_override_font_sizes/font_size = 40
+text = "T"
+autowrap_mode = 2
+script = ExtResource("2_5tl08")

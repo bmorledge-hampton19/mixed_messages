@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://p5k0w8cwfnm5"]
+
+[ext_resource type="FontFile" uid="uid://np3mj1jymi10" path="res://fonts/CourierPrime/CourierPrime-Bold.ttf" id="1_3y20s"]
+[ext_resource type="Script" uid="uid://hj7crcs0avhr" path="res://messages/incoming/IncomingMessage.gd" id="1_8pmau"]
+[ext_resource type="PackedScene" uid="uid://bmpv27hpji67p" path="res://messages/incoming/guessing_letter.tscn" id="2_wrp7p"]
+[ext_resource type="PackedScene" uid="uid://cfcy0hhsbj4mp" path="res://messages/incoming/falling_letter.tscn" id="3_8pmau"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8pmau"]
+bg_color = Color(0.62152386, 0.6215239, 0.6215237, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.29954743, 0.2995475, 0.29954726, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+shadow_size = 8
+shadow_offset = Vector2(4, 4)
+
+[node name="IncomingMesssage" type="PanelContainer" unique_id=594953216 node_paths=PackedStringArray("caret", "complete_message", "guessing_letters_container", "falling_letters_node")]
+custom_minimum_size = Vector2(730, 0)
+offset_right = 730.0
+offset_bottom = 50.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8pmau")
+script = ExtResource("1_8pmau")
+caret = NodePath("CaretControl/Caret")
+complete_message = NodePath("CompleteMessage")
+guessing_letters_container = NodePath("GuessingLetters")
+guessing_letter_prefab = ExtResource("2_wrp7p")
+falling_letters_node = NodePath("FallingLetters")
+falling_letter_prefab = ExtResource("3_8pmau")
+
+[node name="CaretControl" type="Control" parent="." unique_id=1065980900]
+layout_mode = 2
+
+[node name="Caret" type="MarginContainer" parent="CaretControl" unique_id=1978025753]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 40.0
+theme_override_constants/margin_top = 4
+
+[node name="Color" type="ColorRect" parent="CaretControl/Caret" unique_id=200151106]
+layout_mode = 2
+
+[node name="CompleteMessage" type="Label" parent="." unique_id=1253841266]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(726, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_3y20s")
+theme_override_font_sizes/font_size = 40
+text = "This is a message that will have to be decoded."
+autowrap_mode = 3
+
+[node name="GuessingLetters" type="GridContainer" parent="." unique_id=464235709]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 3
+columns = 30
+
+[node name="FallingLetters" type="Control" parent="." unique_id=1954175819]
+layout_mode = 2

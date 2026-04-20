@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://drs3cmusbj5qf"]
+
+[ext_resource type="Script" uid="uid://dsec3iptnjki8" path="res://messages/outgoing/OutgoingMessage.gd" id="1_5hido"]
+[ext_resource type="FontFile" uid="uid://np3mj1jymi10" path="res://fonts/CourierPrime/CourierPrime-Bold.ttf" id="4_4w8g3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8pmau"]
+bg_color = Color(0.40600002, 0.56, 0.19039999, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.29954743, 0.2995475, 0.29954726, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+shadow_size = 8
+shadow_offset = Vector2(4, 4)
+
+[node name="OutgoingMessage" type="PanelContainer" unique_id=594953216 node_paths=PackedStringArray("message_label")]
+custom_minimum_size = Vector2(730, 0)
+offset_right = 730.0
+offset_bottom = 50.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8pmau")
+script = ExtResource("1_5hido")
+message_label = NodePath("Message")
+
+[node name="Message" type="Label" parent="." unique_id=1253841266]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(602, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_4w8g3")
+theme_override_font_sizes/font_size = 40
+text = "This is a message that will be displayed instantly."
+autowrap_mode = 3

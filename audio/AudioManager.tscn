@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://63hqlrclogry"]
+
+[ext_resource type="Script" uid="uid://cds2snexwimmi" path="res://audio/AudioManager.gd" id="1_svqv1"]
+[ext_resource type="AudioStream" uid="uid://b78r8pliwcaqc" path="res://audio/sound_effects/ambiance.ogg" id="2_8tqdp"]
+[ext_resource type="PackedScene" path="res://audio/sound_effects/one_shot_audio.tscn" id="2_ecn5r"]
+[ext_resource type="AudioStream" uid="uid://dm8iosopeqvvm" path="res://audio/sound_effects/keyboard_clacking.tres" id="2_ngew5"]
+[ext_resource type="AudioStream" uid="uid://kbu4bk0hc8i7" path="res://audio/music/music_playlist.tres" id="3_hdtnj"]
+
+[node name="AudioManager" type="Node2D" unique_id=68157008 node_paths=PackedStringArray("sound_effects_node", "music_player", "ambiance_player", "keyboard_clacking_player")]
+process_mode = 3
+script = ExtResource("1_svqv1")
+sound_effects_node = NodePath("SoundEffects")
+one_shot_audio_prefab = ExtResource("2_ecn5r")
+music_player = NodePath("MusicPlayer")
+ambiance_player = NodePath("SoundEffects/AmbiancePlayer")
+keyboard_clacking_player = NodePath("SoundEffects/KeyboardClackingPlayer")
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=173872223]
+process_mode = 3
+stream = ExtResource("3_hdtnj")
+volume_db = -2.0
+max_distance = 4096.0
+attenuation = 0.0
+panning_strength = 0.0
+bus = &"Music"
+area_mask = 0
+
+[node name="SoundEffects" type="Node2D" parent="." unique_id=1655972483]
+
+[node name="KeyboardClackingPlayer" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=847789566]
+process_mode = 3
+stream = ExtResource("2_ngew5")
+max_distance = 4096.0
+attenuation = 0.0
+panning_strength = 0.0
+bus = &"SoundEffects"
+area_mask = 0
+
+[node name="AmbiancePlayer" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=1503030899]
+process_mode = 3
+stream = ExtResource("2_8tqdp")
+max_distance = 4096.0
+attenuation = 0.0
+panning_strength = 0.0
+bus = &"SoundEffects"
+area_mask = 0

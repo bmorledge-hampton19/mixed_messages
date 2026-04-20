@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://gletyfmhcxb8"]
+
+[ext_resource type="Script" uid="uid://c8w3064dypfot" path="res://audio/sound_effects/OneShotAudio.gd" id="1_5xcev"]
+
+[node name="OneShotAudio" type="AudioStreamPlayer2D" unique_id=1845519110]
+max_distance = 4096.0
+attenuation = 0.0
+panning_strength = 0.0
+bus = &"SoundEffects"
+area_mask = 0
+script = ExtResource("1_5xcev")

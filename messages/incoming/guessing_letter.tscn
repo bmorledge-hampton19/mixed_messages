@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bmpv27hpji67p"]
+
+[ext_resource type="FontFile" uid="uid://np3mj1jymi10" path="res://fonts/CourierPrime/CourierPrime-Bold.ttf" id="1_x1fqx"]
+[ext_resource type="Script" uid="uid://dmbmc7l7t8iow" path="res://messages/incoming/GuessingLetter.gd" id="2_ok5ss"]
+
+[node name="GuessingLetter" type="Label" unique_id=1847406274]
+custom_minimum_size = Vector2(24, 0)
+theme_override_fonts/font = ExtResource("1_x1fqx")
+theme_override_font_sizes/font_size = 40
+text = "T"
+autowrap_mode = 2
+script = ExtResource("2_ok5ss")

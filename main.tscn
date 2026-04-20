@@ -1,0 +1,529 @@
+[gd_scene format=3 uid="uid://dsky855m4lg88"]
+
+[ext_resource type="Texture2D" uid="uid://e0tgt2t43o4p" path="res://background.png" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://btkfmjkgxrrbg" path="res://main.gd" id="1_lquwl"]
+[ext_resource type="PackedScene" uid="uid://p5k0w8cwfnm5" path="res://messages/incoming/incoming_messsage.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://dbqopy1uyw6rc" path="res://signal_monitor/SignalMonitor.gd" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://bl7qppkn1xf25" path="res://story_tracker/StoryTracker.gd" id="2_7mycd"]
+[ext_resource type="FontFile" uid="uid://j1o3yvijumte" path="res://fonts/VT323/VT323-Regular.ttf" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://drs3cmusbj5qf" path="res://messages/outgoing/outgoing_message.tscn" id="3_h2yge"]
+[ext_resource type="FontFile" uid="uid://np3mj1jymi10" path="res://fonts/CourierPrime/CourierPrime-Bold.ttf" id="8_5vw27"]
+[ext_resource type="Texture2D" uid="uid://c4e67ngusfo0b" path="res://ending_graphic.png" id="8_kek77"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0.16206557, 0.1620656, 0.16206548, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.16206557, 0.1620656, 0.16206548, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
+bg_color = Color(0.16206557, 0.1620656, 0.16206548, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.641934, 0.64193404, 0.64193386, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw27"]
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.641934, 0.64193404, 0.64193386, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Theme" id="Theme_kek77"]
+VScrollBar/constants/padding_left = 10
+VScrollBar/constants/padding_right = 10
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_1bvp3")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_lquwl")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_7mycd")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_272bh")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_5vw27")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0xm2m"]
+content_margin_top = 20.0
+content_margin_bottom = 20.0
+
+[node name="Main" type="Node2D" unique_id=864020291 node_paths=PackedStringArray("story_tracker", "signal_monitor", "chat_container", "message_container", "fade_to_black", "ending_graphic")]
+script = ExtResource("1_lquwl")
+story_tracker = NodePath("StoryTracker")
+signal_monitor = NodePath("SignalMonitor")
+chat_container = NodePath("Messages")
+message_container = NodePath("Messages/MarginContainer/MessagesPlusMargin/MessagesContainer")
+fade_to_black = NodePath("FadeToBlack")
+ending_graphic = NodePath("Ending")
+
+[node name="StoryTracker" type="Node" parent="." unique_id=1874996847]
+script = ExtResource("2_7mycd")
+incoming_message_prefab = ExtResource("2_0xm2m")
+outgoing_message_prefab = ExtResource("3_h2yge")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1428785881]
+texture_filter = 1
+offset_right = 960.0
+offset_bottom = 540.0
+texture = ExtResource("1_ig7tw")
+
+[node name="SignalMonitor" type="MarginContainer" parent="." unique_id=1362875233 node_paths=PackedStringArray("letter_backgrounds_container", "letter_indicators_container", "alert")]
+offset_left = 242.0
+offset_top = 94.0
+offset_right = 1194.0
+offset_bottom = 234.0
+scale = Vector2(0.5, 0.5)
+script = ExtResource("2_1bvp3")
+letter_backgrounds_container = NodePath("GimmeControlBack/LetterBackgrounds")
+letter_indicators_container = NodePath("GimmeControlBack/LetterIndicators")
+alert = NodePath("GimmeControlBack/Alert")
+
+[node name="Background" type="ColorRect" parent="SignalMonitor" unique_id=1157204554]
+layout_mode = 2
+color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+
+[node name="GimmeControlBack" type="Control" parent="SignalMonitor" unique_id=2088223009]
+layout_mode = 2
+
+[node name="LetterBackgrounds" type="HBoxContainer" parent="SignalMonitor/GimmeControlBack" unique_id=1592598769]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 944.0
+offset_bottom = 60.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="A" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=1965347677]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "A"
+
+[node name="B" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=677984758]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "B"
+
+[node name="C" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=1055898122]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "C"
+
+[node name="D" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=1874762156]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "D"
+
+[node name="E" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=1494860478]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "E"
+
+[node name="F" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=222391361]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "F"
+
+[node name="G" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=2013324588]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "G"
+
+[node name="H" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=14251082]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "H"
+
+[node name="I" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=292601728]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "I"
+
+[node name="J" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=927572353]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "J"
+
+[node name="K" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=2077132322]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "K"
+
+[node name="L" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=2098195668]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "L"
+
+[node name="M" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=1471895297]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "M"
+
+[node name="N" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=763756061]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "N"
+
+[node name="O" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=1929297572]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "O"
+
+[node name="P" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=1738286464]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "P"
+
+[node name="Q" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=182450945]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "Q"
+
+[node name="R" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=642484089]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "R"
+
+[node name="S" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=1660220932]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "S"
+
+[node name="T" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=477769183]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "T"
+
+[node name="U" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=1274469781]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "U"
+
+[node name="V" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=855627041]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "V"
+
+[node name="W" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=560414359]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "W"
+
+[node name="X" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=1772779913]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "X"
+
+[node name="Y" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=908447674]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "Y"
+
+[node name="Z" type="Label" parent="SignalMonitor/GimmeControlBack/LetterBackgrounds" unique_id=2080717171]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "Z"
+
+[node name="LetterIndicators" type="HBoxContainer" parent="SignalMonitor/GimmeControlBack" unique_id=1660654018]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 944.0
+offset_bottom = 49.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="A" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=423111520]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "A"
+
+[node name="B" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1890994787]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "B"
+
+[node name="C" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=115541934]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "C"
+
+[node name="D" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1009682428]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "D"
+
+[node name="E" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=586886617]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "E"
+
+[node name="F" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1179895625]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "F"
+
+[node name="G" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1076980828]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "G"
+
+[node name="H" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1370139521]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "H"
+
+[node name="I" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1176858108]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "I"
+
+[node name="J" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=770219871]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "J"
+
+[node name="K" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=445994668]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "K"
+
+[node name="L" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1855041889]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "L"
+
+[node name="M" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1555354915]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "M"
+
+[node name="N" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1823626239]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "N"
+
+[node name="O" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1686082626]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "O"
+
+[node name="P" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=723556298]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "P"
+
+[node name="Q" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=671000917]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "Q"
+
+[node name="R" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1341062596]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "R"
+
+[node name="S" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=365618174]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "S"
+
+[node name="T" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1298377770]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "T"
+
+[node name="U" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1626350070]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "U"
+
+[node name="V" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=136973055]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "V"
+
+[node name="W" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=1392311221]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "W"
+
+[node name="X" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=2117358974]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "X"
+
+[node name="Y" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=649574618]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "Y"
+
+[node name="Z" type="Label" parent="SignalMonitor/GimmeControlBack/LetterIndicators" unique_id=944365681]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 60
+text = "Z"
+
+[node name="Alert" type="Label" parent="SignalMonitor/GimmeControlBack" unique_id=1935738815]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 74.0
+offset_right = 948.0
+offset_bottom = 123.0
+theme_override_fonts/font = ExtResource("2_h2yge")
+theme_override_font_sizes/font_size = 48
+text = "Signal monitor operational. Receiving message."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Messages" type="ScrollContainer" parent="." unique_id=1513507818]
+offset_left = 242.0
+offset_top = 164.0
+offset_right = 1194.0
+offset_bottom = 680.0
+scale = Vector2(0.5, 0.5)
+theme = SubResource("Theme_kek77")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0xm2m")
+
+[node name="MarginContainer" type="MarginContainer" parent="Messages" unique_id=304737382]
+custom_minimum_size = Vector2(950, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = -8
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 12
+
+[node name="MessagesPlusMargin" type="VBoxContainer" parent="Messages/MarginContainer" unique_id=527746851]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MessagesContainer" type="VBoxContainer" parent="Messages/MarginContainer/MessagesPlusMargin" unique_id=21123891]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Control" type="Control" parent="Messages/MarginContainer/MessagesPlusMargin" unique_id=733449189]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="FadeToBlack" type="ColorRect" parent="." unique_id=1491388475]
+modulate = Color(1, 1, 1, 0)
+offset_right = 960.0
+offset_bottom = 540.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Ending" type="CanvasGroup" parent="." unique_id=1409148608]
+modulate = Color(1, 1, 1, 0)
+
+[node name="TextureRect" type="TextureRect" parent="Ending" unique_id=1720384691]
+offset_right = 960.0
+offset_bottom = 540.0
+mouse_filter = 2
+texture = ExtResource("8_kek77")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Ending" unique_id=1096036182]
+offset_top = 35.0
+offset_right = 960.0
+offset_bottom = 103.0
+theme_override_fonts/font = ExtResource("8_5vw27")
+theme_override_font_sizes/font_size = 60
+text = "Thanks for Playing!"
+horizontal_alignment = 1
