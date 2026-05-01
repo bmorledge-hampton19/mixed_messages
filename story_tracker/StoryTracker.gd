@@ -17,17 +17,18 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"Hello, this is Lookout Bravo. Do you read me?",
-		0.25
+		0.2
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
-		"Lookout Bravo, this is Christie from the ranger station. Your connection is subpar, but it's workable. " +
+		"Lookout Bravo, this is Christie from the ranger station. " +
+		"Your connection is subpar, but I can work around it. " +
 		"What can I help you with?"
 	),
 	MessageData.new(
 		MessageType.INCOMING,
 		"Oh wow. I wasn't expecting to get a response this late in the day... How, uh... How are you doing?",
-		0.4
+		0.25
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -40,7 +41,7 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"Oh, uh... Never mind. It's fine. I can just call back when you're not as busy.",
-		0.5
+		0.25
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -49,7 +50,7 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"Not really. I'm just like, REALLY hungry. That's all.",
-		0.5
+		0.3
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -58,7 +59,7 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"Well, I'm not exactly OUT of food. I just don't have any to eat, you know?",
-		0.5
+		0.35
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -67,12 +68,12 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"I mean, I could eat it, but I can't decide what to cook. I've got a bad case of analysis paralysis.",
-		0.5
+		0.35
 	),
 	MessageData.new(
 		MessageType.INCOMING,
 		"Sorry. Sorry... I told you it was stupid... I should probably just hang up now...",
-		0.4
+		0.2
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -81,7 +82,7 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"Well, I've got some bread... and some peanut butter... and some jelly... and that's it.",
-		0.5
+		0.35
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -90,7 +91,7 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"Ugh. That's what EVERYONE has been suggesting, but I've had nothing but PB&J sandwiches for DAYS now.",
-		0.5
+		0.35
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -99,7 +100,7 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"Don't get me wrong. PB&J is great and all, a classic, as most would agree.",
-		0.6
+		0.4
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -109,7 +110,7 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"But at a certain point it stops being a sticky, sweet treat and just feels sticky... You know?",
-		0.7
+		0.45
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -118,7 +119,7 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"And ever since I ran out of water last week, it's just been a lot harder to keep the sticky down, ya know?",
-		0.75
+		0.5
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -127,7 +128,7 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"Hey... I need to get something off my chest. I lied to you...",
-		0.75
+		0.5
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -136,27 +137,27 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"I don't really have just the ingredients for PB&J. I've got mayonnaise too.",
-		0.75
+		0.5
 	),
 	MessageData.new(
 		MessageType.INCOMING,
 		"I should have told you sooner, but I was afraid that if I did, you might suggest a " +
 		"peanut butter and mayonnaise sandwich instead.",
-		0.75
+		0.5
 	),
 	MessageData.new(
 		MessageType.INCOMING,
 		"And I'm afraid of eggs and egg-based products. I'm sorry. Can you forgive me?",
-		0.75
+		0.5
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
-		"Yes. Fine. Let's just got someone up to help you. Are you in need of anything besides food and water?"
+		"Yes. Fine. Let's just get someone up to help you. Are you in need of anything besides food and water?"
 	),
 	MessageData.new(
 		MessageType.INCOMING,
 		"Well, since you asked. I am a bit lonely. Maybe you could send up your friendliest ranger with a deck of cards?",
-		0.85
+		0.6
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -165,12 +166,12 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"Oh drat... I was trying to get rid of the mayonnaise before you called, so I smeared it all over the radio antennae.",
-		0.9
+		0.675
 	),
 	MessageData.new(
 		MessageType.INCOMING,
 		"It looks like the chipmunks finally found it. I'll bet they wouldn't have lied to you. They probably love PB&M...",
-		0.9
+		0.75
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
@@ -179,7 +180,7 @@ var messages: Array[MessageData] = [
 	MessageData.new(
 		MessageType.INCOMING,
 		"Pro tip: When the chipmunks are in a feeding frenzy, DO NOT use the acorn-ghillie suit to try and hide from them.",
-		0.9
+		0.825
 	),
 	MessageData.new(
 		MessageType.INCOMING,
@@ -206,7 +207,7 @@ var messages: Array[MessageData] = [
 	),
 	MessageData.new(
 		MessageType.OUTGOING,
-		"I suppose you're right... Need to me to pick anything up on the way home?"
+		"I suppose you're right... Need me to pick anything up on the way home?"
 	),
 	MessageData.new(
 		MessageType.INCOMING,
@@ -240,4 +241,10 @@ func get_next_message():
 		message.init(message_data.text)
 
 	next_message_index += 1
+	return message
+
+func get_calibration_message() -> IncomingMessage:
+	var message: IncomingMessage = incoming_message_prefab.instantiate()
+	message.init("The quick brown fox jumps over the lazy dog.", 0.9)
+	message.mash_assist_enabled = true
 	return message

@@ -16,3 +16,12 @@ func get_random_letter(upper := false, exclude := '') -> String:
 func is_whitespace(character: String) -> bool:
 	assert(character.length() == 1, "is_whitespace() passed multiple characters but expected one.")
 	return character in [' ', '\n', '\r', '\f', '\t', '\v']
+
+func is_letter(character: String) -> bool:
+	if len(character) != 1: return false
+
+	var character_code = ord(character)
+	if (character_code >= 65 and character_code <= 90) or (character_code >= 97 and character_code <= 122):
+		return true
+	else:
+		return false

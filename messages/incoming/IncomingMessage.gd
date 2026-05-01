@@ -18,12 +18,19 @@ var guessing_letters: Array[GuessingLetter]
 var guessing_index: int
 var current_guessing_letter: GuessingLetter:
 	get(): return guessing_letters[guessing_index] if guessing_letters else null
+var all_letters: Array[GuessingLetter]
+var grace_index: int
 var total_letters: int
 var guess_ratio: float:
 	get(): return 1.0-guessing_letters.size()/float(total_letters)
 
 @export var falling_letters_node: Control
 @export var falling_letter_prefab: PackedScene
+
+
+var mash_assist_enabled := false
+var consecutive_wrong_guesses := 0
+var time_since_wrong_guess := 0.0
 
 
 var completed: bool
@@ -88,13 +95,15 @@ func get_next_line_end_index(from_index: int) -> int:
 
 func init_guess_letter(character := " "):
 	var guessing_letter: GuessingLetter = guessing_letter_prefab.instantiate()
-	if character.to_lower() in Help.LETTERS:
-		total_letters += 1
+	if Help.is_letter(character):
 		if randf() < missing_letter_rate or guessing_letters.size() == 0:
-			guessing_letter.init(character, true)
+			guessing_letter.init(character, true, total_letters)
 			guessing_letters.append(guessing_letter)
+			guessing_letter.on_click.connect(attempt_move_caret)
 		else:
-			guessing_letter.init(character, false)
+			guessing_letter.init(character, false, total_letters)
+		all_letters.append(guessing_letter)
+		total_letters += 1
 	else:
 		guessing_letter.init(character, false)
 	guessing_letters_container.add_child(guessing_letter)
@@ -102,7 +111,7 @@ func init_guess_letter(character := " "):
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float):
 	if not completed:
 		caret_blink_countdown -= delta
 		if caret_blink_countdown <= 0:
@@ -112,43 +121,71 @@ func _process(delta):
 
 		if Input.is_action_just_pressed("left"):
 			guessing_index = wrapi(guessing_index-1,0,guessing_letters.size())
-			if current_guessing_letter: caret.global_position = current_guessing_letter.global_position
+			if current_guessing_letter:
+				caret.global_position = current_guessing_letter.global_position
+				grace_index = current_guessing_letter.index
 		if Input.is_action_just_pressed("right"):
 			guessing_index = wrapi(guessing_index+1,0,guessing_letters.size())
-			if current_guessing_letter: caret.global_position = current_guessing_letter.global_position
+			if current_guessing_letter:
+				caret.global_position = current_guessing_letter.global_position
+				grace_index = current_guessing_letter.index
+
+		time_since_wrong_guess += delta
+		if time_since_wrong_guess > 3.0: consecutive_wrong_guesses = 0
+
+
+func attempt_move_caret(moving_to: GuessingLetter):
+	if moving_to.guessed or guessing_letters.find(moving_to) == -1: return
+
+	guessing_index = guessing_letters.find(moving_to)
+	grace_index = moving_to.index
+	caret.global_position = current_guessing_letter.global_position
+
 
 func guess(character: String):
 	if current_guessing_letter.is_upper: character = character.to_upper()
+	if mash_assist_enabled and consecutive_wrong_guesses > 26 and randf() < 0.1:
+		character = current_guessing_letter.correct_character
 
 	if current_guessing_letter.guess(character):
+
+		grace_index = wrapi(current_guessing_letter.index + 1,0,len(all_letters))
 		guessing_letters.remove_at(guessing_index)
+
 		if not guessing_letters: complete()
 		else: AudioManager.play_right_letter()
+		consecutive_wrong_guesses = 0
 	else:
 		var falling_letter: FallingLetter = falling_letter_prefab.instantiate()
 		falling_letters_node.add_child(falling_letter)
 		falling_letter.text = character
 		falling_letter.global_position = current_guessing_letter.global_position
-		guessing_index += 1
+		if character.to_lower() == all_letters[grace_index].correct_character.to_lower():
+			grace_index = wrapi(grace_index + 1,0,len(all_letters))
+		else:
+			grace_index = wrapi(current_guessing_letter.index + 1,0,len(all_letters))
+			guessing_index += 1
 		AudioManager.play_wrong_letter()
+		consecutive_wrong_guesses += 1
+		time_since_wrong_guess = 0
 
 	if guessing_index >= guessing_letters.size(): guessing_index = 0
 	if current_guessing_letter: caret.global_position = current_guessing_letter.global_position
 
 
-const FREQUENCY_RADIUS = 5
+const PREDICTION_LENGTH = 10
 func get_guess_letter_frequencies() -> Dictionary[String,float]:
 	var max_count = 1
 	var frequency_table: Dictionary[String,float]
 
-	if guessing_letters.size() < FREQUENCY_RADIUS*2 + 1:
+	if guessing_letters.size() < PREDICTION_LENGTH:
 		for guessing_letter in guessing_letters:
 			var character := guessing_letter.correct_character.to_lower()
 			var count: int = frequency_table.get_or_add(character, 0) + 1
 			frequency_table[character] = count
 			if count > max_count: max_count = count
 	else:
-		for i in range(guessing_index - FREQUENCY_RADIUS, guessing_index + FREQUENCY_RADIUS + 1):
+		for i in range(guessing_index, guessing_index + PREDICTION_LENGTH):
 			var guessing_letter := guessing_letters[wrapi(i,0,guessing_letters.size())]
 			var character := guessing_letter.correct_character.to_lower()
 			var count: int = frequency_table.get_or_add(character, 0) + 1

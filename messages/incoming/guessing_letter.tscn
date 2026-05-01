@@ -5,6 +5,9 @@
 
 [node name="GuessingLetter" type="Label" unique_id=1847406274]
 custom_minimum_size = Vector2(24, 0)
+offset_right = 24.0
+offset_bottom = 46.0
+mouse_filter = 0
 theme_override_fonts/font = ExtResource("1_x1fqx")
 theme_override_font_sizes/font_size = 40
 text = "T"

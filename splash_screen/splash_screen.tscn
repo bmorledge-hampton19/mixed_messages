@@ -1271,6 +1271,7 @@ texture = ExtResource("4_4syrc")
 hframes = 5
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CenterContainer/DrBeanControl/Sprite2D" unique_id=1595744035]
+volume_db = -2.0
 attenuation = 0.0
 panning_strength = 0.0
 area_mask = 0

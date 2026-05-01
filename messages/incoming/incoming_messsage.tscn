@@ -68,3 +68,4 @@ columns = 30
 
 [node name="FallingLetters" type="Control" parent="." unique_id=1954175819]
 layout_mode = 2
+mouse_filter = 2

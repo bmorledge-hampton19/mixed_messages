@@ -45,11 +45,12 @@ func _process(delta):
 
 
 
-func init_message(p_message: IncomingMessage):
+func init_message(p_message: IncomingMessage, basic_alert := true):
 	message = p_message
 	update_letters(message.get_guess_letter_frequencies())
-	update_alert("New signal acquired.")
-	alert_timer = 2.0
+	if basic_alert:
+		update_alert("New signal acquired.")
+		alert_timer = 2.0
 
 
 func update_letters(frequency_table: Dictionary[String, float]):

@@ -8,6 +8,10 @@ class_name Main extends Node2D
 @export var fade_to_black: ColorRect
 @export var ending_graphic: CanvasGroup
 
+var calibrating := true
+var calibration_stage := 0
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	signal_monitor.on_finished_decoding.connect(finish_incoming_message)
@@ -63,20 +67,44 @@ func play_intro_sequence():
 	
 	intro_tween.tween_callback(signal_monitor.show_letters)
 	intro_tween.tween_interval(1)
-	intro_tween.tween_callback(func(): signal_monitor.update_alert("Signal monitor operational. Receiving message.",false,1.5))
+	intro_tween.tween_callback(func(): signal_monitor.update_alert("Signal monitor operational.",false,1.5))
 	intro_tween.tween_interval(3)
-	intro_tween.tween_callback(get_next_message)
-	intro_tween.tween_interval(5)
-	intro_tween.tween_callback(AudioManager.music_player.play)
+	intro_tween.tween_callback(func(): signal_monitor.update_alert("Initializing user calibration.", false, 1.25))
+	intro_tween.tween_interval(1)
+	intro_tween.tween_callback(func(): signal_monitor.update_alert("Initializing user calibration.."))
+	intro_tween.tween_interval(1)
+	intro_tween.tween_callback(func(): signal_monitor.update_alert("Initializing user calibration..."))
+	intro_tween.tween_interval(1)
+	intro_tween.tween_callback(get_calibration_message)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
-	if Input.is_action_just_pressed("fullscreen"):
-		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-		else:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)	
+	if calibrating and signal_monitor.message:
+		if calibration_stage < 1 and signal_monitor.message.guess_ratio > 0:
+			signal_monitor.alert_timer = 60
+			calibration_stage = 1
+			signal_monitor.update_alert("Begin calibration. Keyboard mashing recommended.")
+		elif calibration_stage < 2 and signal_monitor.message.guess_ratio > 0.3:
+			signal_monitor.alert_timer = 60
+			calibration_stage = 2
+			signal_monitor.update_alert("Use signal monitor to determine upcoming keys.", false, 1.25)
+		elif calibration_stage < 3 and signal_monitor.message.guess_ratio > 0.6:
+			signal_monitor.alert_timer = 60
+			calibration_stage = 3
+			signal_monitor.update_alert("Fully decode message to complete calibration.", false, 1.25)
+		elif calibration_stage < 4 and signal_monitor.message.guess_ratio > 0.8:
+			signal_monitor.alert_timer = 0
+			calibration_stage = 4
+			signal_monitor.update_signal_strength()
+
+
+func get_calibration_message():
+	calibrating = true
+	var calibration_message := story_tracker.get_calibration_message()
+	message_container.add_child(calibration_message)
+	signal_monitor.init_message(calibration_message, false)
+	AudioManager.play_sound(AudioManager.NEW_MESSAGE)
 
 
 func get_next_message():
@@ -95,10 +123,21 @@ func get_next_message():
 func finish_incoming_message():
 	var finish_message_tween := create_tween()
 
-	finish_message_tween.tween_callback(func(): signal_monitor.update_alert("Signal locked. Ready to transmit response."))
-	finish_message_tween.tween_interval(2)
+	if calibrating:
 
-	finish_message_tween.tween_callback(get_next_message)
+		finish_message_tween.tween_callback(func(): signal_monitor.update_alert("Calibration complete. Receiving message..."))
+		finish_message_tween.tween_interval(3)
+		finish_message_tween.tween_callback(get_next_message)
+		finish_message_tween.tween_interval(5)
+		finish_message_tween.tween_callback(AudioManager.music_player.play)
+
+		calibrating = false
+
+	else:
+		finish_message_tween.tween_callback(func(): signal_monitor.update_alert("Signal locked. Ready to transmit response."))
+		finish_message_tween.tween_interval(2)
+
+		finish_message_tween.tween_callback(get_next_message)
 
 func finish_outgoing_message(wait_for_response := true):
 	var finish_message_tween := create_tween()

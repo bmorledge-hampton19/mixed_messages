@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://gletyfmhcxb8"]
 
-[ext_resource type="Script" uid="uid://c8w3064dypfot" path="res://audio/sound_effects/OneShotAudio.gd" id="1_5xcev"]
+[ext_resource type="Script" uid="uid://duoukjmux5spj" path="res://audio/sound_effects/OneShotAudio.gd" id="1_5xcev"]
 
 [node name="OneShotAudio" type="AudioStreamPlayer2D" unique_id=1845519110]
 max_distance = 4096.0

@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://cqlbamd7ef7kw"]
+
+[ext_resource type="Texture2D" uid="uid://e0tgt2t43o4p" path="res://background.png" id="1_kocx1"]
+[ext_resource type="PackedScene" uid="uid://bmpv27hpji67p" path="res://messages/incoming/guessing_letter.tscn" id="2_gh0jr"]
+[ext_resource type="FontFile" uid="uid://np3mj1jymi10" path="res://fonts/CourierPrime/CourierPrime-Bold.ttf" id="4_6bnyt"]
+
+[node name="Background" type="TextureRect" unique_id=128101409]
+texture_filter = 1
+offset_right = 960.0
+offset_bottom = 540.0
+texture = ExtResource("1_kocx1")
+
+[node name="Mixed" type="Label" parent="." unique_id=2108235981]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -238.0
+offset_top = 132.0
+offset_right = 238.0
+offset_bottom = 240.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_6bnyt")
+theme_override_font_sizes/font_size = 96
+text = "M XE "
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="GuessingLetter" parent="Mixed" unique_id=1847406274 instance=ExtResource("2_gh0jr")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 0
+offset_left = 152.0
+offset_right = 214.0
+offset_bottom = 108.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "I"
+initialize_self = true
+
+[node name="GuessingLetter2" parent="Mixed" unique_id=2022816955 instance=ExtResource("2_gh0jr")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 0
+offset_left = 324.0
+offset_right = 337.0
+offset_bottom = 108.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "D"
+initialize_self = true
+
+[node name="Messages" type="Label" parent="." unique_id=673145725]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -238.0
+offset_top = 282.0
+offset_right = 238.0
+offset_bottom = 390.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_6bnyt")
+theme_override_font_sizes/font_size = 96
+text = "M S AGE "
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="GuessingLetter" parent="Messages" unique_id=1154465874 instance=ExtResource("2_gh0jr")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 0
+offset_left = 65.0
+offset_right = 78.0
+offset_bottom = 108.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "E"
+initialize_self = true
+
+[node name="GuessingLetter2" parent="Messages" unique_id=584819467 instance=ExtResource("2_gh0jr")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 0
+offset_left = 180.0
+offset_right = 193.0
+offset_bottom = 108.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "S"
+initialize_self = true
+
+[node name="GuessingLetter3" parent="Messages" unique_id=2074199191 instance=ExtResource("2_gh0jr")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 0
+offset_left = 410.0
+offset_right = 423.0
+offset_bottom = 108.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 96
+text = "S"
+initialize_self = true

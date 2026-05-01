@@ -31,9 +31,11 @@ const FINISHED_DECODING = preload(SOUND_EFFECTS_DIR + "finished_decoding.wav")
 
 var music_fade_tween: Tween
 
+const BASE_VOLUME_LINEAR = 1.25
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	AudioServer.set_bus_volume_linear(0, BASE_VOLUME_LINEAR)
 
 
 
@@ -42,7 +44,7 @@ func _ready():
 func _process(_delta: float):
 	if Input.is_action_just_pressed("mute"):
 		if AudioServer.get_bus_volume_linear(0): AudioServer.set_bus_volume_linear(0, 0)
-		else: AudioServer.set_bus_volume_linear(0, 1)
+		else: AudioServer.set_bus_volume_linear(0, BASE_VOLUME_LINEAR)
 
 
 func play_sound(

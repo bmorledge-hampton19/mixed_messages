@@ -18,11 +18,10 @@ keyboard_clacking_player = NodePath("SoundEffects/KeyboardClackingPlayer")
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=173872223]
 process_mode = 3
 stream = ExtResource("3_hdtnj")
-volume_db = -2.0
+volume_db = 2.0
 max_distance = 4096.0
 attenuation = 0.0
 panning_strength = 0.0
-bus = &"Music"
 area_mask = 0
 
 [node name="SoundEffects" type="Node2D" parent="." unique_id=1655972483]
@@ -30,6 +29,7 @@ area_mask = 0
 [node name="KeyboardClackingPlayer" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=847789566]
 process_mode = 3
 stream = ExtResource("2_ngew5")
+volume_db = -2.0
 max_distance = 4096.0
 attenuation = 0.0
 panning_strength = 0.0
@@ -39,6 +39,7 @@ area_mask = 0
 [node name="AmbiancePlayer" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=1503030899]
 process_mode = 3
 stream = ExtResource("2_8tqdp")
+volume_db = 2.0
 max_distance = 4096.0
 attenuation = 0.0
 panning_strength = 0.0
