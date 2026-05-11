@@ -179,7 +179,8 @@ var messages: Array[MessageData] = [
 	),
 	MessageData.new(
 		MessageType.INCOMING,
-		"Pro tip: When the chipmunks are in a feeding frenzy, DO NOT use the acorn-ghillie suit to try and hide from them.",
+		"Pro tip: When the chipmunks are in a feeding frenzy, " +
+		"DO NOT try to appease them by covering yourself with peanut butter.",
 		0.825
 	),
 	MessageData.new(
